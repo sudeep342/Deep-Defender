@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-sans: 'Inter', sans-serif;
+    --font-display: 'Orbitron', sans-serif;
+    --font-mono: 'Fira Code', monospace;
+
+    /* Base theme: Dark/Cyberpunk */
+    --background: 240 10% 4%;
+    --foreground: 0 0% 98%;
+
+    --card: 240 10% 6%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 240 10% 6%;
+    --popover-foreground: 0 0% 98%;
+
+    /* Primary: Cyber Blue/Cyan */
+    --primary: 190 90% 50%;
+    --primary-foreground: 240 10% 4%;
+
+    --secondary: 240 10% 12%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 240 10% 12%;
+    --muted-foreground: 240 5% 65%;
+
+    --accent: 190 90% 50%;
+    --accent-foreground: 240 10% 4%;
+
+    /* Critical: Neon Red */
+    --destructive: 350 100% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Normal/Success: Neon Green */
+    --success: 120 100% 50%;
+    --success-foreground: 240 10% 4%;
+
+    --border: 240 10% 16%;
+    --input: 240 10% 16%;
+    --ring: 190 90% 50%;
+
+    --radius: 0.25rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-primary/30 selection:text-primary;
+    font-family: var(--font-sans);
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+}
+
+@layer utilities {
+  .text-glow-primary {
+    text-shadow: 0 0 10px hsl(var(--primary) / 0.5), 0 0 20px hsl(var(--primary) / 0.3);
+  }
+  .text-glow-destructive {
+    text-shadow: 0 0 10px hsl(var(--destructive) / 0.5), 0 0 20px hsl(var(--destructive) / 0.3);
+  }
+  .text-glow-success {
+    text-shadow: 0 0 10px hsl(var(--success) / 0.5), 0 0 20px hsl(var(--success) / 0.3);
+  }
+  
+  .box-glow-primary {
+    box-shadow: 0 0 15px hsl(var(--primary) / 0.2), inset 0 0 10px hsl(var(--primary) / 0.1);
+  }
+  .box-glow-destructive {
+    box-shadow: 0 0 15px hsl(var(--destructive) / 0.2), inset 0 0 10px hsl(var(--destructive) / 0.1);
+  }
+
+  .cyber-grid {
+    background-size: 40px 40px;
+    background-image: 
+      linear-gradient(to right, hsl(var(--primary) / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--primary) / 0.05) 1px, transparent 1px);
+    mask-image: radial-gradient(ellipse at center, black 40%, transparent 80%);
+  }
+
+  /* Scanline effect */
+  .scanlines {
+    position: relative;
+    overflow: hidden;
+  }
+  .scanlines::before {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+    z-index: 50;
+    background-size: 100% 2px, 3px 100%;
+    pointer-events: none;
+  }
+}
+
+/* Radar Animation */
+@keyframes radar-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.radar-sweep {
+  animation: radar-spin 4s linear infinite;
+  background: conic-gradient(from 0deg, transparent 70%, hsl(var(--primary) / 0.4) 100%);
+}
